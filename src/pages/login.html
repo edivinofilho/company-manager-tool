@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/toast.css">
+
+    <script src="../scripts/login.js" type="module" defer></script>
+    <title>Login - Kenzie Empresas</title>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="../img/logo.svg" alt="logo">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <div class="headers__buttons-container">
+            <button class="login">Home</button>
+            <button class="register">Cadastro</button>
+        </div>
+    </header>
+    <main>
+        <form>
+            <h1>Login</h1>
+            
+            <p>Preencha os campos para realizar login</p>
+            
+            <input type="email" name="email" id="email_login" class="login_input" placeholder="Seu email">
+            
+            <input type="password" name="password" id="password_login" class="login_input" placeholder="Sua senha">
+            
+            <button type="submit" id="login_button">Login</button>
+            <p>OU</p>
+            
+            <button type="submit">Cadastre-se</button>
+        </form>
+    </main>
+    <div class="toast__container hidden">
+        <p>Mensagem do toast</p>
+    </div>
+</body>
+</html>

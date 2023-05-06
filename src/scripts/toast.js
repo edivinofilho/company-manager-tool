@@ -2,7 +2,7 @@
 
 export function toast(color, text) {
     const toastContainer = document.querySelector('.toast__container')
-    const toastText = document.querySelector('./toast__container > p')
+    const toastText = document.querySelector('.toast__container > p')
 
     toastContainer.classList.remove('hidden')
 

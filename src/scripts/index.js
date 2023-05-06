@@ -1,9 +1,28 @@
-import { toast } from "./toast.js";
 import { getAllCategories, getAllCompanies, getCompanyByCategoryName } from "./requests.js";
 
 const allCategories = await getAllCategories()
 
 //function authentication(){}
+
+function loginPage() {
+    const button = document.querySelector('.login')
+
+    button.addEventListener('click', ()=> {
+        window.open('./src/pages/login.html')
+    })
+}
+
+loginPage()
+
+function registerPage() {
+    const button = document.querySelector('.register')
+
+    button.addEventListener('click', ()=> {
+        window.open('./src/pages/register.html')
+    })
+}
+
+registerPage()
 
 function selectCategory(array) {
     const select = document.querySelector('#select')
@@ -15,11 +34,30 @@ function selectCategory(array) {
         option.innerText = category.name
         
         select.appendChild(option)
-        // console.log(option.id)
     })
 }
 
 selectCategory(allCategories)
+
+function createAllCompanyCards() {
+    getAllCompanies().then(companies => {
+      const companyCategory = companies.map(company => {
+        const category = allCategories.find(category => category.id === company.category_id);
+  
+        if (category) {
+          return {
+            ...company,
+            category_id: category.name
+          };
+        }
+        return company;
+      });
+  
+      createCompanyCard(companyCategory);
+    });
+}
+
+createAllCompanyCards()
 
 function filterCompaniesByCategory() {
     const select = document.querySelector('#select')
@@ -28,16 +66,27 @@ function filterCompaniesByCategory() {
         const value = select.value
         const categoryName = event.target.value
 
+        
         if(value === ''){
-            const companies = await getAllCompanies()
-            
-            createCompanyCard(companies)
+           createAllCompanyCards()
                                 
-        } else {
-    
+        } else {   
+            
             const companiesByCategory = await getCompanyByCategoryName(categoryName)
             
-            createCompanyCard(companiesByCategory)
+            const filteredCompanyCategory = companiesByCategory.map(company => {
+                const category = allCategories.find(category => category.id === company.category_id)
+
+                if(category) {
+                    return {
+                        ...company,
+                        category_id: category.name
+                    }
+                }
+                return company
+            })
+
+            createCompanyCard(filteredCompanyCategory)
         }
     })
 }
@@ -56,11 +105,12 @@ function createCompanyCard(array) {
         companyName.innerText = element.name
 
         const sector = document.createElement('span')
+
         sector.innerText = element.category_id
 
         companyCard.append(companyName, sector)
         companiesList.appendChild(companyCard)
 
-        return companiesList
+        return companyCard
     })
 }
