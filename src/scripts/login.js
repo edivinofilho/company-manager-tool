@@ -1,7 +1,6 @@
 
-import {loginRequest, red} from './requests.js'
-import {toast} from "./toast.js"
-
+import { loginRequest, red } from './requests.js'
+import { toast } from "./toast.js"
 
 export function handleLogin() {
     const inputs = document.querySelectorAll('.login_input')
@@ -31,3 +30,31 @@ export function handleLogin() {
 }
 
 handleLogin()
+
+function registerPageFromLogin() {
+    const buttons = document.querySelectorAll('.register')
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', (event)=> {
+            event.preventDefault()
+            location.replace('./register.html')
+        })
+    }
+    )
+}
+
+registerPageFromLogin()
+
+
+function backHomeFromLogin() {
+    const button = document.querySelector('.back-home-button')
+
+    button.addEventListener('click', (event)=> {
+        event.preventDefault()
+        location.replace('../../index.html')
+    })
+}
+
+backHomeFromLogin()
+
+

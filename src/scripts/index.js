@@ -8,7 +8,7 @@ function loginPage() {
     const button = document.querySelector('.login')
 
     button.addEventListener('click', ()=> {
-        window.open('./src/pages/login.html')
+        location.replace('./src/pages/login.html')
     })
 }
 
@@ -18,13 +18,13 @@ function registerPage() {
     const button = document.querySelector('.register')
 
     button.addEventListener('click', ()=> {
-        window.open('./src/pages/register.html')
+        location.replace('./src/pages/register.html')
     })
 }
 
 registerPage()
 
-function selectCategory(array) {
+export function selectCategory(array) {
     const select = document.querySelector('#select')
     
     array.forEach(category => {

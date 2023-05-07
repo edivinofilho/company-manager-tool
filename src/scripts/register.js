@@ -1,6 +1,6 @@
-// import { handleLogin } from "./login.js"
+import { toast } from "./toast.js"
 
-import { createUserRequest } from "./requests.js"
+import { createUserRequest, red, green } from "./requests.js"
 
 export function backHome() {
     const buttons = document.querySelectorAll('.back-home-button')
@@ -14,6 +14,17 @@ export function backHome() {
 }
 
 backHome()
+
+function loginPageFromRegister() {
+    const button = document.querySelector('.login')
+    
+    button.addEventListener('click', (event)=> {
+        event.preventDefault()
+        location.replace('./login.html')
+    })
+}
+
+loginPageFromRegister()
 
 export async function handleRegister() {
     const inputs = document.querySelectorAll('.register_input')
@@ -34,10 +45,20 @@ export async function handleRegister() {
         })
         if(count !== 0){
             count = 0
+
             return toast(red, 'Por favor preencha os dados necessários')
+            
         } else {
-            const user = await createUserRequest(userData)
-            return user
+            
+            toast(green, 'User criado com sucesso, agora faça seu login!')
+
+            setTimeout(async () => {
+                const user = await createUserRequest(userData)
+                
+                location.replace('./login.html')
+                
+                return user
+            }, 3000)
         }
     })
 }

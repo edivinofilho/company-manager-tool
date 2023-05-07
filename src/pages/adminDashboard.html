@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../styles/toast.css">
+    
+    <script src="../scripts/adminDashboard.js" type="module" defer></script>
+    <title>Adm - Dashboard</title>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="../img/logo.svg" alt="logo">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <button class="logout">Logout</button>
+    </header>
+    <main>
+        <div class="select__container">
+            <select name="select" id="select">
+                <option value="">Selecionar Empresa</option>
+            </select>
+        </div>
+        <section>
+            <h2>Departamentos</h2>
+            <button class="create-department">+ Criar</button>
+            <ul class="department__container">
+                <li>
+                    <div class="department__description-container">
+                        <h3>DepartamentoNome</h3>
+                        <p>DepartamentoDescrição</p>
+                        <p>NomeCompanhia</p>
+                    </div>
+                    <div class="icons__container">
+                        <img src="../img/visualizar.svg" alt="visualizar" class="visualization-icon">
+                        <img src="../img/editar.svg" alt="editar" class="edition-icon">
+                        <img src="../img/deletar.svg" alt="deletar" class="deletion-icon">
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>Usuários cadastrados</h2>
+            <ul class="user__container">
+                <li>
+                    <div >
+                        <h3>Username</h3>
+                        <p>NomeCompanhia</p>
+                    </div>
+                    <div class="icons__container">
+                        <img src="../img/editar.svg" alt="editar">
+                        <img src="../img/deletar.svg" alt="deletar">
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <div class="toast__container hidden">
+        <p>Mensagem do toast</p>
+    </div>
+</body>
+</html>
