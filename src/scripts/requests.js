@@ -181,9 +181,9 @@ export async function deleteUserRequest(employeeId) {
     })
     .then(async (res) => {
         if(res.ok){
-            // toast(green, 'Usuário deletado com sucesso')
+            toast(green, 'Usuário deletado com sucesso')
 
-            // return res.json()
+            return res.json()
         } else {
             const response = await res.json()
             toast(red, response.message)
@@ -191,8 +191,8 @@ export async function deleteUserRequest(employeeId) {
             
         }
     })
-    console.log(deletedUser)
-    // return deletedUser
+    // console.log(deletedUser)
+    return deletedUser
 }
 
 export async function editUserDetailsRequest(employeeId, userData){
@@ -217,4 +217,28 @@ export async function editUserDetailsRequest(employeeId, userData){
     })
     console.log(userDetails)
     return userDetails
+}
+
+export async function createNewDepartmentRequest(departmentData) {
+    const newDepartment = await fetch(`${baseUrl}/departments/create`, {
+        method: 'POST',
+        headers: requestHeaders,
+        body: JSON.stringify(departmentData) 
+    })
+    .then(async (res) => {
+        if(res.ok){
+
+            toast(green, 'Departamento criado com sucesso')
+
+            return res.json()
+            
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    console.log(newDepartment)
+    return newDepartment
 }

@@ -1,6 +1,6 @@
-import { deleteUserRequest } from "./requests.js"
+import { deleteUserRequest, getAllEmployeesRequest } from "./requests.js"
+import { createUserCard } from "./adminDashboard.js"
 
-//Resolver problema da página fazer o reload
 export function showDeleteModal() {
     const buttons = document.querySelectorAll('.deletion-icon')
     const modalController = document.querySelector('.modal__controller--delete')
@@ -27,14 +27,15 @@ export function showDeleteModal() {
                 console.log(id)
 
                 await deleteUserRequest(id)
+        
+                const allEmployees = await getAllEmployeesRequest() 
 
-                // createAllUserCards(allEmployees)
+                createUserCard(allEmployees)
 
-                // modalController.close()
+                modalController.close()
             })
         })
     })
-    closeDeleteModal()
 }
 
 function closeDeleteModal() {

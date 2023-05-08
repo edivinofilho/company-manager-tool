@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/toast.css">
     
     <script src="../scripts/adminDashboard.js" type="module" defer></script>
+    
     <title>Adm - Dashboard</title>
 </head>
 <body>
@@ -78,6 +79,24 @@
             <input type="email" name="email" placeholder="E-mail" class="add__input">
             <button type="submit
             " class="submit-edit-button">Salvar</button>
+        </div>
+    </dialog>
+
+    <dialog class="modal__controller--create-department">
+        <div class="create-department_modal__container">
+            <span class="create-department_modal__close">X</span>
+            <h2>Editar Usuário</h2>
+            
+            <input type="text" name="name" placeholder="Nome do departamento" class="add__input">
+            
+            <input type="text" name="description" placeholder="Descrição" class="add__input">
+
+            <select name="select" id="select-create-dpto-modal">
+                <option value="">Selecionar Empresa</option>
+            </select>
+
+            <button type="submit
+            " class="submit-edit-button">Criar</button>
         </div>
     </dialog>
 </body>

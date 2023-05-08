@@ -1,6 +1,6 @@
-import { editUserDetailsRequest, red } from './requests.js'
+import { editUserDetailsRequest, red, green, getAllEmployeesRequest } from './requests.js'
 import { toast } from './toast.js'
-import { allEmployees, createUserCard } from './adminDashboard.js'
+import { createUserCard } from './adminDashboard.js'
 
 export function showEditModal() {
     const modalController = document.querySelector('.modal__controller--edit')
@@ -45,8 +45,11 @@ export function showEditModal() {
                     inputs.forEach(input=> {
                         input.value = ''
                     })
+                    const allEmployees = await getAllEmployeesRequest()
                     
                     createUserCard(allEmployees)
+
+                    modalController.close()
                 }
             }) 
         })

@@ -23,7 +23,7 @@ logOut()
 const allCompanies = await getAllCompanies()
 // console.log(allCompanies)
 
-function selectCompany(array) {
+export function selectCompany(array) {
     const select = document.querySelector('#select')
     
     array.forEach(company => {
@@ -109,7 +109,7 @@ function createAllDepartmentCards() {
 
 createAllDepartmentCards()
 
- export const allEmployees = await getAllEmployeesRequest()
+export const allEmployees = await getAllEmployeesRequest()
 console.log(allEmployees)
 
 export function createUserCard(array) {
@@ -152,15 +152,11 @@ export function createUserCard(array) {
 
         userCardContainer.appendChild(card)
     })
+    showEditModal()
+    showDeleteModal()
 }
 
 createUserCard(allEmployees)
-
-// createAllUserCards(allEmployees)
-
-// function createAllUserCards(array) {
-//     createUserCard(array)
-// }
 
 function filterCompanyById() {
     const select = document.querySelector('#select');
@@ -214,6 +210,6 @@ filterCompanyById()
 
 // O por que a página faz o reload depois que um usuário é deletado?
 
-showDeleteModal()
-showEditModal()
+// showDeleteModal()
+// showEditModal()
 
