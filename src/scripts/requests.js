@@ -173,3 +173,48 @@ export async function filterCompaniesByIdRequest(companyId) {
     console.log(company)
     return company
 }
+
+export async function deleteUserRequest(employeeId) {
+    const deletedUser = await fetch(`${baseUrl}/employees/deleteEmployee/${employeeId}`, {
+        method: 'DELETE',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            // toast(green, 'Usuário deletado com sucesso')
+
+            // return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    console.log(deletedUser)
+    // return deletedUser
+}
+
+export async function editUserDetailsRequest(employeeId, userData){
+    const userDetails = await fetch(`${baseUrl}/employees/updateEmployee/${employeeId}`, {
+        method: 'PATCH',
+        headers: requestHeaders,
+        body: JSON.stringify(userData)
+    })
+    .then(async (res) => {
+        if(res.ok){
+
+            toast(green, 'Usuário atualizado com sucesso')
+
+            return res.json()
+            
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    console.log(userDetails)
+    return userDetails
+}

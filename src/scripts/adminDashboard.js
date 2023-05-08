@@ -1,5 +1,7 @@
 import{ toast } from './toast.js'
-import { red, green, getAllCompanies, getAllDepartmentsRequest, getAllEmployeesRequest, filterCompaniesByIdRequest } from './requests.js'
+import { red, green, getAllCompanies, getAllDepartmentsRequest, getAllEmployeesRequest, filterCompaniesByIdRequest, deleteUserRequest, editUserDetailsRequest, } from './requests.js'
+import { showDeleteModal } from './deleteModal.js'
+import { showEditModal } from './editUserModal.js'
 
 function logOut() {
     const button = document.querySelector('.logout')
@@ -7,6 +9,8 @@ function logOut() {
     button.addEventListener('click', () =>{
 
         toast(green, 'Até breve, estou fazendo seu logout!')
+
+        localStorage.clear()
         
         setTimeout(() => {    
             location.replace('../../index.html')
@@ -105,15 +109,17 @@ function createAllDepartmentCards() {
 
 createAllDepartmentCards()
 
-const allEmployees = await getAllEmployeesRequest()
+ export const allEmployees = await getAllEmployeesRequest()
+console.log(allEmployees)
 
-function createUserCard(array) {
+export function createUserCard(array) {
     const userCardContainer = document.querySelector('.user__container')
 
     userCardContainer.innerHTML = ''
 
     array.forEach(element => {
         const card = document.createElement('li')
+        card.id = `user-card-${element.id}`
 
         const userDetails = document.createElement('div')
 
@@ -129,10 +135,14 @@ function createUserCard(array) {
         const editionIcon = document.createElement('img')
         editionIcon.src = '../img/editar.svg'
         editionIcon.classList.add('edition-icon')
+        editionIcon.dataset.name = element.name
+        editionIcon.id = `edit-icon-${element.id}`
         
         const deletionIcon = document.createElement('img')
         deletionIcon.src = '../img/deletar.svg'
-        deletionIcon.classList.add('deletion-icon') 
+        deletionIcon.classList.add('deletion-icon')
+        deletionIcon.dataset.name = element.name
+        deletionIcon.id = `delete-icon-${element.id}` 
 
         iconsContainer.append(editionIcon, deletionIcon)
 
@@ -144,18 +154,19 @@ function createUserCard(array) {
     })
 }
 
-function createAllUserCards(array) {
-    createUserCard(array)
-}
+createUserCard(allEmployees)
 
-createAllUserCards(allEmployees)
+// createAllUserCards(allEmployees)
+
+// function createAllUserCards(array) {
+//     createUserCard(array)
+// }
 
 function filterCompanyById() {
     const select = document.querySelector('#select');
 
     const departmentList = document.querySelector('.department__container')
 
-  
     select.addEventListener('change', async (event) => {
       const value = select.value;
       const option = select.selectedOptions[0]; 
@@ -163,6 +174,7 @@ function filterCompanyById() {
   
       if (value === '') {
         createAllDepartmentCards();
+
       } else {
         const companyId = option.id; 
 
@@ -180,7 +192,18 @@ function filterCompanyById() {
         } else {
             const departments = filteredCompany.departments;
 
-            createDepartmentCard(departments)
+            const companyByNameArray = departments.map(department => {
+                const matchingCompany = allCompanies.find(company => company.id === department.company_id)
+
+                if(matchingCompany){
+                    return {
+                        ...department,
+                        company_id: matchingCompany.name
+                    }
+                }
+            })
+
+            createDepartmentCard(companyByNameArray)
             console.log(departments);
         }
       }
@@ -188,3 +211,9 @@ function filterCompanyById() {
   }
 
 filterCompanyById()
+
+// O por que a página faz o reload depois que um usuário é deletado?
+
+showDeleteModal()
+showEditModal()
+

@@ -61,5 +61,24 @@
     <div class="toast__container hidden">
         <p>Mensagem do toast</p>
     </div>
+    <dialog class="modal__controller--delete">
+        <div class="delete_modal__container">
+            <span class="delete_modal__close">X</span>
+            <h2>Realmente deseja remover o usuário NOME?</h2>
+            <button type="submit
+            " class="delete-button">Remover</button>
+        </div>
+    </dialog>
+
+    <dialog class="modal__controller--edit">
+        <div class="edit_modal__container">
+            <span class="edit_modal__close">X</span>
+            <h2>Editar Usuário</h2>
+            <input type="text" name="name" placeholder="Nome" class="add__input">
+            <input type="email" name="email" placeholder="E-mail" class="add__input">
+            <button type="submit
+            " class="submit-edit-button">Salvar</button>
+        </div>
+    </dialog>
 </body>
 </html>
