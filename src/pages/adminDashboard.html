@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styles/toast.css">
     
     <script src="../scripts/adminDashboard.js" type="module" defer></script>
-    
+
     <title>Adm - Dashboard</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
     </header>
     <main>
         <div class="select__container">
-            <select name="select" id="select">
+            <select name="select" class="select">
                 <option value="">Selecionar Empresa</option>
             </select>
         </div>
@@ -62,6 +62,7 @@
     <div class="toast__container hidden">
         <p>Mensagem do toast</p>
     </div>
+
     <dialog class="modal__controller--delete">
         <div class="delete_modal__container">
             <span class="delete_modal__close">X</span>
@@ -85,18 +86,61 @@
     <dialog class="modal__controller--create-department">
         <div class="create-department_modal__container">
             <span class="create-department_modal__close">X</span>
-            <h2>Editar Usuário</h2>
+            <h2>Criar Departamento</h2>
             
-            <input type="text" name="name" placeholder="Nome do departamento" class="add__input">
+            <input type="text" name="name" placeholder="Nome do departamento" id="dpto_name">
             
-            <input type="text" name="description" placeholder="Descrição" class="add__input">
+            <input type="text" name="description" placeholder="Descrição" id="dpto_description">
 
-            <select name="select" id="select-create-dpto-modal">
+            <select name="company_id" id="select-create-dpto-modal" class="select-create-department">
                 <option value="">Selecionar Empresa</option>
             </select>
 
             <button type="submit
-            " class="submit-edit-button">Criar</button>
+            " class="submit-create-dpto-button">Criar</button>
+        </div>
+    </dialog>
+
+    <dialog class="modal__controller--delete-department">
+        <div class="delete_modal__container-department">
+            <span class="delete-department_modal__close">X</span>
+            <h2>Realmente deseja remover o departamento NOME e demitir seus funcionários?</h2>
+            <button type="submit" class="delete-department-button">Remover</button>
+        </div>
+    </dialog>
+
+    <dialog class="modal__controller--edit-department">
+        <div class="edit-department_modal__container">
+            <span class="edit-department_modal__close">X</span>
+            <h2>Editar Departamento</h2>
+            <input type="text" name="name" placeholder="Nova Descrição" class="add__input">
+            
+            <button type="submit
+            " class="submit-edit-department-button">Salvar</button>
+        </div>
+    </dialog>
+
+    <dialog class="modal__controller--view">
+        <div class="view_modal__container">
+            <span class="view-department_modal__close">X</span>
+            <h2 class="view-department_title">Nome do Departamento</h2>
+            <p class="view-department_description">Descrição do departamento</p>
+            <p class=" view-department_company-name">Nome Empresa</p>
+
+            <select name="company_id" id="select-view-modal" class="select-create-department">
+                <option value="">Selecionar Usuário</option>
+            </select>
+
+            <button type="submit" class="hire-submit-button">Contratar</button>
+
+            <ul class="working-employees__container">
+                <li>
+                    <h3 class="working-employees__username">Username</h3>
+                    <p>Company Name</p>
+                    <button type="submit" class="working-employees__fired-button">Desligar</button>
+                </li>
+
+            </ul>
         </div>
     </dialog>
 </body>

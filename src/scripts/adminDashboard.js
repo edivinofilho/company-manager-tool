@@ -1,7 +1,18 @@
 import{ toast } from './toast.js'
-import { red, green, getAllCompanies, getAllDepartmentsRequest, getAllEmployeesRequest, filterCompaniesByIdRequest, deleteUserRequest, editUserDetailsRequest, } from './requests.js'
-import { showDeleteModal } from './deleteModal.js'
+import { red, green, getAllCompanies, getAllDepartmentsRequest, getAllEmployeesRequest, filterCompaniesByIdRequest } from './requests.js'
+
+import { showDeleteModal } from './deleteUserModal.js'
+
 import { showEditModal } from './editUserModal.js'
+
+import { showCreateDepartmentModal } from './createDepModal.js'
+
+import { showDeleteDepartmentModal } from './deleteDepModal.js'
+
+import { showEditDepartmentModal } from './editDepModal.js'
+
+import { viewDepartmentModal } from './viewModal.js'
+
 
 function logOut() {
     const button = document.querySelector('.logout')
@@ -24,7 +35,7 @@ const allCompanies = await getAllCompanies()
 // console.log(allCompanies)
 
 export function selectCompany(array) {
-    const select = document.querySelector('#select')
+    const select = document.querySelector('.select')
     
     array.forEach(company => {
         const option = document.createElement('option')
@@ -38,40 +49,51 @@ export function selectCompany(array) {
 
 selectCompany(allCompanies)
 
-function createDepartmentCard(array) {
+export function createDepartmentCard(array) {
     const departmentListContainer = document.querySelector('.department__container')
 
     departmentListContainer.innerHTML = ''
 
     array.forEach(element => {
         const departmentCard = document.createElement('li')
+        departmentCard.id = `department-${element.id}`
+        departmentCard.dataset.name = element.name
 
         const departmentDescriptionContainer = document.createElement('div')
         departmentDescriptionContainer.classList.add('department__description-container')
 
         const departmentName = document.createElement('h3')
+        departmentName.classList.add('department_name')
         departmentName.innerText = element.name
         
         const departmentDescription = document.createElement('p')
+        departmentDescription.classList.add('department_description')
         departmentDescription.innerText = element.description
 
         const companyName = document.createElement('p')
         companyName.innerText = element.company_id
+        companyName.classList.add('company_name')
 
         const iconsContainer = document.createElement('div')
         iconsContainer.classList.add('icons__container')
 
         const visualizationIcon = document.createElement('img')
         visualizationIcon.src = '../img/visualizar.svg'
-        visualizationIcon.classList.add('visualization-icon')
+        visualizationIcon.classList.add('visualization-icon__department')
+        visualizationIcon.dataset.name = element.name
+        visualizationIcon.id = `department-view-${element.id}`
 
         const editionIcon = document.createElement('img')
         editionIcon.src = '../img/editar.svg'
-        editionIcon.classList.add('edition-icon')
+        editionIcon.classList.add('edition-icon__department')
+        editionIcon.dataset.name = element.name
+        editionIcon.id = `department-edit-${element.id}`
         
         const deletionIcon = document.createElement('img')
         deletionIcon.src = '../img/deletar.svg'
-        deletionIcon.classList.add('deletion-icon')
+        deletionIcon.classList.add('deletion-icon__department')
+        deletionIcon.dataset.name = element.name
+        deletionIcon.id = `department-delete-${element.id}`
 
         departmentDescriptionContainer.append(departmentName, departmentDescription, companyName)
 
@@ -87,9 +109,8 @@ function createDepartmentCard(array) {
 
 const allDepartments = await getAllDepartmentsRequest()
 
-// console.log(allDepartments)
 
-function createAllDepartmentCards() {
+export function createAllDepartmentCards() {
     
     const departmentByCompanyName = allDepartments.map(department => {
         const company = allCompanies.find(company => company.id === department.company_id) 
@@ -110,7 +131,7 @@ function createAllDepartmentCards() {
 createAllDepartmentCards()
 
 export const allEmployees = await getAllEmployeesRequest()
-console.log(allEmployees)
+// console.log(allEmployees)
 
 export function createUserCard(array) {
     const userCardContainer = document.querySelector('.user__container')
@@ -156,10 +177,26 @@ export function createUserCard(array) {
     showDeleteModal()
 }
 
-createUserCard(allEmployees)
+export function createAllUserCards() {
+    const userWithCompanyName = allEmployees.map(user => {
+        const company = allCompanies.find(company => company.id === user.company_id) 
+
+        if (company) {
+            return {
+                ...user,
+                company_id: company.name 
+            }
+        }
+        return user
+    })
+
+    createUserCard(userWithCompanyName)
+}
+
+createAllUserCards()
 
 function filterCompanyById() {
-    const select = document.querySelector('#select');
+    const select = document.querySelector('.select');
 
     const departmentList = document.querySelector('.department__container')
 
@@ -207,9 +244,11 @@ function filterCompanyById() {
   }
 
 filterCompanyById()
+showCreateDepartmentModal()
 
-// O por que a página faz o reload depois que um usuário é deletado?
+// Falta adicionar função para demitir todos os funcioários do departamento
+showDeleteDepartmentModal()
 
-// showDeleteModal()
-// showEditModal()
+showEditDepartmentModal()
 
+viewDepartmentModal()

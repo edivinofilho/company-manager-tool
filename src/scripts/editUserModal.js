@@ -2,10 +2,13 @@ import { editUserDetailsRequest, red, green, getAllEmployeesRequest } from './re
 import { toast } from './toast.js'
 import { createUserCard } from './adminDashboard.js'
 
-export function showEditModal() {
+export async function showEditModal() {
     const modalController = document.querySelector('.modal__controller--edit')
+
     const inputs = document.querySelectorAll('.edit_modal__container > .add__input')
+
     const editButtons = document.querySelectorAll('.edition-icon')
+
     const submitButton = document.querySelector('.submit-edit-button')
     
     const updateBody = {}
@@ -27,16 +30,15 @@ export function showEditModal() {
 
                 })
 
-                console.log(updateBody)
                 if(count !== 0){
                     count = 0
-                    toast(red, 'Por favor preencha os campos acima') 
+                    toast(red, 'Por favor preencha todos os campos') 
                 } else {
                     let idElement = event.target.id
                 
                     let id = idElement.substring(10)
 
-                    console.log(id)
+                    // console.log(id)
                     await editUserDetailsRequest(id, updateBody)
 
                     toast(green, 'Dados do usuário atualizado com sucesso')

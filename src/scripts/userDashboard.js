@@ -11,6 +11,7 @@ function logOut() {
             location.replace('../../index.html')            
           }, 2000)
     })
+    localStorage.clear()
 }
 
 logOut()

@@ -77,7 +77,7 @@ export async function loginRequest(loginBody) {
 
             localStorage.setItem('@kenzieEmpresas:token', JSON.stringify(authToken))
             localStorage.setItem('@kenzieEmpresas:isAdm', JSON.stringify(isAdm))
-
+            
             toast(green, 'Login realizado com sucesso')
 
             setTimeout(() => {
@@ -170,7 +170,7 @@ export async function filterCompaniesByIdRequest(companyId) {
             
         }
     })
-    console.log(company)
+    // console.log(company)
     return company
 }
 
@@ -241,4 +241,111 @@ export async function createNewDepartmentRequest(departmentData) {
     })
     console.log(newDepartment)
     return newDepartment
+}
+
+export async function deleteDepartmentRequest (departmentId) {
+    const deletedDepartment = await fetch(`${baseUrl}/departments/delete/${departmentId}`, {
+        method: 'DELETE',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            toast(green, 'Departamento deletado com sucesso')
+
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(deletedDepartment)
+    return deletedDepartment
+}
+
+export async function dismissingEmployees(employeeId) {
+    const dimissedEmployee = await fetch(`${baseUrl}/employees/dismissEmployee/${employeeId}`, {
+        method: 'PATCH',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            toast(green, 'Funcionário demitido com sucesso')
+
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(dimissedEmployee)
+    return dimissedEmployee
+}
+
+export async function updateDepartmentsRequest(departmentId, departmentData) {
+    const updatedDepartment = await fetch(`${baseUrl}/departments/update/${departmentId}`, {
+        method: 'PATCH',
+        headers: requestHeaders,
+        body: JSON.stringify(departmentData) 
+    })
+    .then(async (res) => {
+        if(res.ok){
+            toast(green, 'Departamento atualizado com sucesso')
+
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(updatedDepartment)
+    return updatedDepartment
+}
+
+export async function getAllOutOfWorkEmployeesRequest() {
+    const outOfWorkEmployees = await fetch(`${baseUrl}/employees/outOfWork`, {
+        method: 'GET',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            // console.log(res)
+            return res.json()
+
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(outOfWorkEmployees)
+    return outOfWorkEmployees
+}
+
+export async function hireEmployeeRequest(employeeId, departmentId) {
+    const hiredEmployee = await fetch(`${baseUrl}/employees/hireEmployee/${employeeId}`, {
+        method: 'PATCH',
+        headers: requestHeaders,
+        body: JSON.stringify(departmentId) 
+    })
+    .then(async (res) => {
+        if(res.ok){
+            toast(green, 'Funcionário contratado com sucesso')
+
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(hiredEmployee)
+    return hiredEmployee
 }

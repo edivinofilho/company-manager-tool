@@ -1,7 +1,7 @@
 import { deleteUserRequest, getAllEmployeesRequest } from "./requests.js"
 import { createUserCard } from "./adminDashboard.js"
 
-export function showDeleteModal() {
+export async function showDeleteModal() {
     const buttons = document.querySelectorAll('.deletion-icon')
     const modalController = document.querySelector('.modal__controller--delete')
     const modalText = document.querySelector('.delete_modal__container > h2')
@@ -19,12 +19,12 @@ export function showDeleteModal() {
 
             deleteButton.addEventListener('click', async (evt)=> {
                 evt.preventDefault()
-                console.log('click')
+                
                 let idElement = event.target.id
                 
                 let id = idElement.substring(12)
 
-                console.log(id)
+                // console.log(id)
 
                 await deleteUserRequest(id)
         
@@ -36,6 +36,7 @@ export function showDeleteModal() {
             })
         })
     })
+    closeDeleteModal()
 }
 
 function closeDeleteModal() {
