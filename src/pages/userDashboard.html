@@ -21,12 +21,23 @@
         <button class="logout">Logout</button>
     </header>
     <main>
-        <section>
-            <h1>USERNAME</h1>
-            <p>user@mail.com</p>
+        <section class="user-details__container">
+            <h1 class="user-details__username">USERNAME</h1>
+            <p class="user-details__userEmail">user@mail.com</p>
         </section>
-        <section>
-            <h2>Você ainda não foi contratado</h2>
+        <section class="user-details__department-container">
+            <h2 class="not-hired-message hidden">Você ainda não foi contratado</h2>
+
+            <div class="user-department__container">
+                <h2>NomeCompanhia - NomeDepartamento</h2>
+
+                <ul class="user-department__cards-container">
+                    <li class="user-department__card">
+                        <p>NomeFuncionário</p>
+                    </li>
+                </ul>
+            </div>
+
         </section>
     </main>
     <div class="toast__container hidden">

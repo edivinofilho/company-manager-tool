@@ -2,7 +2,15 @@ import { getAllCategories, getAllCompanies, getCompanyByCategoryName } from "./r
 
 const allCategories = await getAllCategories()
 
-//function authentication(){}
+function authentication() {
+    const token = localStorage.getItem('@kenzieEmpresas:token')
+
+    if(token){
+        location.replace('./src/pages/adminDashboard.html')
+    }
+}
+
+authentication()
 
 function loginPage() {
     const button = document.querySelector('.login')

@@ -123,9 +123,6 @@ export async function viewDepartmentModal() {
                 await hireEmployeeRequest(selectedElementId, updateBody)
             })
 
-            // fireButtons.forEach
-
-
         })
     })
     closeViewDepartmentModal()

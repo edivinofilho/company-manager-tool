@@ -14,6 +14,17 @@ import { showEditDepartmentModal } from './editDepModal.js'
 import { viewDepartmentModal } from './viewModal.js'
 
 
+
+function authentication() {
+    const token = localStorage.getItem('@kenzieEmpresas:token')
+
+    if(!token){
+        location.replace('../../index.html')
+    }
+}
+
+authentication()
+
 function logOut() {
     const button = document.querySelector('.logout')
 
@@ -107,7 +118,7 @@ export function createDepartmentCard(array) {
     })
 }
 
-const allDepartments = await getAllDepartmentsRequest()
+export const allDepartments = await getAllDepartmentsRequest()
 
 
 export function createAllDepartmentCards() {
@@ -189,7 +200,6 @@ export function createAllUserCards() {
         }
         return user
     })
-
     createUserCard(userWithCompanyName)
 }
 

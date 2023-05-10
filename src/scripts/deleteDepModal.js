@@ -1,8 +1,8 @@
-import { deleteDepartmentRequest, getAllDepartmentsRequest } from "./requests.js";
+import { deleteDepartmentRequest, getAllDepartmentsRequest, dismissingEmployees, filterCompaniesByIdRequest, getAllEmployeesRequest } from "./requests.js";
 
-import { createDepartmentCard } from "./adminDashboard.js"; 
+import { createAllUserCards } from "./adminDashboard.js"; 
 
-// Falta adicionar a função para demitir todos os funcionários
+
 export async function showDeleteDepartmentModal() {
     const deleteButtons = document.querySelectorAll('.deletion-icon__department')
 
@@ -25,14 +25,31 @@ export async function showDeleteDepartmentModal() {
                 let idElement = event.target.id
                 
                 let id = idElement.substring(18)
-
+                console.log(id)
+                
                 await deleteDepartmentRequest(id)
 
                 const allDepartments = await getAllDepartmentsRequest()
+                console.log(allDepartments)
 
-                createDepartmentCard(allDepartments)
+                allDepartments.forEach(department => {
+                    if(id === department.id){
+                        const companyById =  filterCompaniesByIdRequest(department.company_id)
+                        
+                        companyById.then(function(result) {
+                            const employees = result.employees
+
+                            employees.forEach(employee => {
+                                dismissingEmployees(employee.id)
+                                
+                            })
+                        })
+                    }
+                })              
+                
             })
         })
+        createAllUserCards()
     })
     closeDeleteDepartmentModal()
 }

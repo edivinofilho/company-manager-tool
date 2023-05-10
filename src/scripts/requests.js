@@ -349,3 +349,41 @@ export async function hireEmployeeRequest(employeeId, departmentId) {
     // console.log(hiredEmployee)
     return hiredEmployee
 }
+
+export async function getEmployeesProfileRequest() {
+    const employeeProfile = await fetch(`${baseUrl}/employees/profile`, {
+        method: 'GET',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(employeeProfile)
+    return employeeProfile
+}
+
+export async function getDepartmentById(departmentId) {
+    const department = await fetch(`${baseUrl}/departments/readById/${departmentId}`, {
+        method: 'GET',
+        headers: requestHeaders
+    })
+    .then(async (res) => {
+        if(res.ok){
+            return res.json()
+        } else {
+            const response = await res.json()
+            toast(red, response.message)
+            console.log(response)
+            
+        }
+    })
+    // console.log(department)
+    return department
+}
