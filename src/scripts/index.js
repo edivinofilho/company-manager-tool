@@ -113,11 +113,13 @@ function createCompanyCard(array) {
 
     array.forEach(element => {
         const companyCard = document.createElement('li')
+        companyCard.classList.add('company-list-item')
 
         const companyName = document.createElement('h2')
         companyName.innerText = element.name
 
         const sector = document.createElement('span')
+        sector.classList.add('company-list-item-sector')
 
         sector.innerText = element.category_id
 

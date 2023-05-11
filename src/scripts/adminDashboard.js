@@ -70,6 +70,7 @@ export function createDepartmentCard(array) {
         const departmentCard = document.createElement('li')
         departmentCard.id = `department-${element.id}`
         departmentCard.dataset.name = element.name
+        departmentCard.classList.add('department-card__container')
 
         const departmentDescriptionContainer = document.createElement('div')
         departmentDescriptionContainer.classList.add('department__description-container')
@@ -154,6 +155,7 @@ export function createUserCard(array) {
     array.forEach(element => {
         const card = document.createElement('li')
         card.id = `user-card-${element.id}`
+        card.classList.add('user-card__container')
 
         const userDetails = document.createElement('div')
 

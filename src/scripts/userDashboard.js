@@ -31,7 +31,7 @@ function userdetails(obj) {
     const username = document.querySelector('.user-details__username')
     const userEmail = document.querySelector('.user-details__userEmail')
     
-    const userCompanyDepartment = document.querySelector('.user-department__container > h2')
+    const userCompanyDepartment = document.querySelector('.user-department__company-title > h2')
     
     const notHiredMsg = document.querySelector('.not-hired-message')
     const departmentDetails = document.querySelector('.user-department__container')

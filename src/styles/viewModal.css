@@ -1,0 +1,120 @@
+.modal__controller--view {
+    width: 857px;
+    height: 600px;
+    
+    outline: none;
+
+    border: 2px solid transparent;
+
+}
+
+ .view_modal__container {
+    width: 840px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+
+    padding: 30px;
+
+    position: relative;
+}
+
+.view_modal__container > span {
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    cursor: pointer;
+}
+
+.view-department_title {
+    font-size: 50px;
+}
+.view-department_description {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.view-department_company-name {
+    margin-top: -5px;
+}
+
+.select-view-modal__container {
+    width: 100%;
+    padding: 5px 0 5px 0;
+}
+
+.select-view-modal__container > select {
+    width: 81%;
+
+    padding: 15px;
+    
+    font-size: 14px;
+
+    border: 1px solid #e4e4e4;
+}
+
+.select-view-modal__container > button {
+    width: 18%;
+
+    padding: 15px;
+
+    font-size: 14px;
+
+    border: 1px solid var(--modal-button-color-green);
+
+    background-color: var(--modal-button-color-green);
+
+    color: var(--brand-color-2);
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.select-view-modal__container > button:hover {
+    color: var(--modal-button-color-green);
+
+    transition: var(--transition-hover);
+    background-color: var(--brand-color-2);
+}
+
+.working-employees__container {
+    width: 780px;
+    height: 700px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    
+    overflow-x: auto;
+
+    background-color: #e4e4e4;
+
+    position: relative;
+}
+
+.working-employees__user-container {
+    width: 350px;
+    height: 200px;
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    margin-top: 50px; */
+ 
+    background-color: var(--brand-color-2);
+}
+
+.working-employees__fired-button {
+    padding: 30px;
+
+    border: 1px solid var(--modal-button-color-orange)
+    
+}

@@ -1,0 +1,61 @@
+.modal__controller--delete-department {
+    width: 620px;
+    height: 280px;
+    
+    outline: none;
+
+    border: 2px solid transparent;
+
+}
+
+.delete_modal__container-department {
+    width: 620px;
+    height: 280px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    padding: 30px;
+
+    position: relative;
+}
+
+.delete_modal__container-department > span {
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    cursor: pointer;
+}
+
+.delete-department-button {
+    width: 60%;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    padding: 12px;
+
+    color: var(--brand-color-2);
+
+    border: 1px solid transparent;
+
+    background-color: var(--modal-button-color-orange);
+
+    cursor: pointer;
+
+}
+
+.delete-department-button:hover {
+    color: var(--modal-button-color-orange);
+
+    border: 1px solid var(--modal-button-color-orange);
+
+    background-color: var(--brand-color-2);
+
+    transition: var(--transition-hover);
+} 

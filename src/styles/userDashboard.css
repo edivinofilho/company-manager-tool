@@ -1,3 +1,156 @@
-.hidde {
+header {
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid var(--header-border-color);  
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.headers__logo-container {
+    width: 20%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 12px;
+}
+
+header > button {
+    font-size: 16px;
+    font-weight: 600;
+    
+    width: 142px;
+    height: 48px;
+
+    border: 1px solid var(--brand-color-1);
+    
+    color: var(--brand-color-1);
+    
+    background-color: var(--brand-color-2);
+    
+    cursor: pointer;
+}
+
+header > button:hover {
+    color: var(--brand-color-2);
+    
+    background-color: var(--brand-color-1);
+
+    transition: var(--transition-hover);
+}
+
+main {
+    width: 100%;
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.user-details__container {
+    width: 51%;
+    height: 15vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding-left: 30px;
+
+    margin-top: -90px;
+
+    border: 1px solid var(--header-border-color);
+}
+
+.user-details__department-container {
+    width: 52.5%;
+    height: 55vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    overflow-y: auto;
+
+    border: 1px solid var(--header-border-color);
+}
+
+.user-department__container {
+    width: 100%;
+    height: 100%;
+    
+    overflow-y: hidden;
+    background-color: #E9ECEF;
+}
+.user-department__company-title {
+    width: 100%;
+    height: 8vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--brand-color-2);
+
+    background-color: var(--brand-color-1);
+}
+
+.user-department__cards-container {
+    width: 100%;
+    
+    display: flex;
+    
+    justify-content: center;
+    flex-wrap:wrap;
+    gap: 40px;
+
+    padding-top: 30px;
+
+    overflow-y: auto;
+    background-color: #E9ECEF;
+}
+
+.user-department__card {
+    width: 200px;
+    height: 95px;
+
+    display:flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding-left: 15px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    
+    border: 1px solid var(--brand-color-1)
+}
+
+.not-hired-message {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dad9d9;
+    
+    background-color: #E9ECEF;
+
+}
+
+
+.hidden {
     display: none;
 }

@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
+body, header, div, img, h1, h2, h3, button, main, aside, ul, li, span {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    list-style: none;
+}
+
+:root {
+    --brand-color-1: #0000FF;
+    --brand-color-2: #FFFFFF;
+    --modal-button-color-orange: #FF5630;
+    --modal-button-color-green: #36B37E;
+
+    --header-border-color: rgba(0, 0, 0, 0.1);
+    
+    --transition-hover: 0.5s;
+}
+
 body {
     font-family: 'Inter', Sain;
 }
+

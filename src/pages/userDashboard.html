@@ -10,12 +10,15 @@
     <script src="../scripts/toast.js" type="module" defer></script>
 
     <link rel="stylesheet" href="../styles/toast.css">
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/userDashboard.css">
+
     
     <title>User page - Kenzie Empresas</title>
 </head>
 <body>
     <header>
-        <div>
+        <div class="headers__logo-container">
             <img src="../img/logo.svg" alt="logo">
             <h1>Kenzie Empresas</h1>
         </div>
@@ -30,7 +33,9 @@
             <h2 class="not-hired-message hidden">Você ainda não foi contratado</h2>
 
             <div class="user-department__container">
-                <h2>NomeCompanhia - NomeDepartamento</h2>
+                <div class="user-department__company-title">
+                    <h2 class="company-name">NomeCompanhia - NomeDepartamento</h2>
+                </div>
 
                 <ul class="user-department__cards-container">
                     <li class="user-department__card">

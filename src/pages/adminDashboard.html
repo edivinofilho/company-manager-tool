@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../styles/toast.css">
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/adminDashboard.css">
+    <link rel="stylesheet" href="../styles/deleteUserModal.css">
+    <link rel="stylesheet" href="../styles/deleteDepModal.css">
+    <link rel="stylesheet" href="../styles/editDepModal.css">
+    <link rel="stylesheet" href="../styles/editUserModal.css">
+    <link rel="stylesheet" href="../styles/createDepModal.css">
+    <link rel="stylesheet" href="../styles/viewModal.css">
        
     <script src="../scripts/adminDashboard.js" type="module" defer></script>
     
@@ -14,7 +22,7 @@
 </head>
 <body>
     <header>
-        <div>
+        <div class="headers__logo-container">
             <img src="../img/logo.svg" alt="logo">
             <h1>Kenzie Empresas</h1>
         </div>
@@ -26,11 +34,13 @@
                 <option value="">Selecionar Empresa</option>
             </select>
         </div>
-        <section>
+        <div class="departments__container--header">
             <h2>Departamentos</h2>
             <button class="create-department">+ Criar</button>
+        </div>
+        <section class="departments__container">
             <ul class="department__container">
-                <li>
+                <li class="department-card__container">
                     <div class="department__description-container">
                         <h3>DepartamentoNome</h3>
                         <p>DepartamentoDescrição</p>
@@ -44,10 +54,12 @@
                 </li>
             </ul>
         </section>
-        <section>
-            <h2>Usuários cadastrados</h2>
+        
+        <h2 class="user__container--title">Usuários cadastrados</h2>
+        
+        <section class="users__container">
             <ul class="user__container">
-                <li>
+                <li class="user-card__container">
                     <div >
                         <h3>Username</h3>
                         <p>NomeCompanhia</p>
@@ -128,14 +140,16 @@
             <p class="view-department_description">Descrição do departamento</p>
             <p class=" view-department_company-name">Nome Empresa</p>
 
-            <select name="company_id" id="select-view-modal" class="select-create-department">
-                <option value="">Selecionar Usuário</option>
-            </select>
-
-            <button type="submit" class="hire-submit-button">Contratar</button>
+            <div class="select-view-modal__container">
+                <select name="company_id" id="select-view-modal" class="select-create-department">
+                    <option value="">Selecionar Usuário</option>
+                </select>
+    
+                <button type="submit" class="hire-submit-button">Contratar</button>
+            </div>
 
             <ul class="working-employees__container">
-                <li>
+                <li class="working-employees__user-container">
                     <h3 class="working-employees__username">Username</h3>
                     <p>Company Name</p>
                     <button type="submit" class="working-employees__fired-button">Desligar</button>

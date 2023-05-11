@@ -1,0 +1,78 @@
+.modal__controller--create-department {
+    width: 485px;
+    height: 380px;
+    
+    outline: none;
+
+    border: 2px solid transparent;
+
+}
+
+.create-department_modal__container {
+    width: 485px;
+    height: 380px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    padding: 30px;
+
+    position: relative;
+}
+
+.create-department_modal__container > span {
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    cursor: pointer;
+}
+
+input  {
+    width: 79.5%;
+    height: 113px;
+
+    padding: 20px;
+
+    border: 1px solid rgb(214, 214, 214);
+}
+
+#select-create-dpto-modal {
+    width: 90%;
+    
+    padding: 18px;
+
+    border: 1px solid rgb(214, 214, 214);
+}
+
+.submit-create-dpto-button {
+    width: 90%;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    padding: 12px;
+
+    color: var(--brand-color-2);
+
+    border: 1px solid transparent;
+
+    background-color: var(--modal-button-color-green);
+
+    cursor: pointer;
+
+}
+
+.submit-create-dpto-button:hover {
+    color: var(--modal-button-color-green);
+
+    border: 1px solid var(--modal-button-color-green);
+
+    background-color: var(--brand-color-2);
+
+    transition: var(--transition-hover);
+} 
