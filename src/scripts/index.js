@@ -1,16 +1,13 @@
 import { getAllCategories, getAllCompanies, getCompanyByCategoryName } from "./requests.js";
 
-const allCategories = await getAllCategories()
-
-function authentication() {
+function authenticationAdmin() {
     const token = localStorage.getItem('@kenzieEmpresas:token')
 
     if(token){
         location.replace('./src/pages/adminDashboard.html')
     }
 }
-
-authentication()
+authenticationAdmin()
 
 function loginPage() {
     const button = document.querySelector('.login')
@@ -45,9 +42,15 @@ export function selectCategory(array) {
     })
 }
 
-selectCategory(allCategories)
+async function renderSelect() {
+    const allCategories = await getAllCategories()
+    selectCategory(allCategories)
+}
 
-function createAllCompanyCards() {
+renderSelect()
+
+async function createAllCompanyCards() {
+    const allCategories = await getAllCategories()
     getAllCompanies().then(companies => {
       const companyCategory = companies.map(company => {
         const category = allCategories.find(category => category.id === company.category_id);
@@ -67,7 +70,9 @@ function createAllCompanyCards() {
 
 createAllCompanyCards()
 
-function filterCompaniesByCategory() {
+async function filterCompaniesByCategory() {
+    const allCategories = await getAllCategories() 
+
     const select = document.querySelector('#select')
 
     select.addEventListener('change', async(event) => {

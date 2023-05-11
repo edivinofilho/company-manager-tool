@@ -1,7 +1,6 @@
-import { deleteDepartmentRequest, getAllDepartmentsRequest, dismissingEmployees, filterCompaniesByIdRequest, getAllEmployeesRequest } from "./requests.js";
+import { deleteDepartmentRequest, getAllDepartmentsRequest, dismissingEmployees, filterCompaniesByIdRequest } from "./requests.js";
 
 import { createAllUserCards } from "./adminDashboard.js"; 
-
 
 export async function showDeleteDepartmentModal() {
     const deleteButtons = document.querySelectorAll('.deletion-icon__department')

@@ -1,5 +1,6 @@
 import { getAllOutOfWorkEmployeesRequest, hireEmployeeRequest, filterCompaniesByIdRequest, getAllDepartmentsRequest, getAllCompanies, dismissingEmployees } from './requests.js'
 
+
 function selectOutOfWorkEmployees(array) {
     const select = document.querySelector('#select-view-modal')
     
@@ -9,7 +10,7 @@ function selectOutOfWorkEmployees(array) {
         option.value = user.name
         option.innerText = user.name
         
-        select.appendChild(option)
+        select.append(option)
     })
 }
 
@@ -34,9 +35,10 @@ function createHiredEmployeesCards(array) {
         firedButton.classList.add('fire-employee')
         firedButton.id = element.id
 
+        console.log(firedButton.id)
         firedButton.addEventListener('click', () =>{
             dismissingEmployees(firedButton.id)
-            console.log(firedButton.id)
+            
         })
 
         userDetails.append(username, companyName, firedButton)
@@ -45,13 +47,8 @@ function createHiredEmployeesCards(array) {
     })
 }
 
-const allDepartments = await getAllDepartmentsRequest()
-
-const allCompanies = await getAllCompanies()
-
-const arrayWithCompanyNames = getArraywithCompanyName(allDepartments)
-
 export async function viewDepartmentModal() {
+
     const modalController = document.querySelector('.modal__controller--view')
 
     const viewButtons = document.querySelectorAll('.visualization-icon__department')
@@ -62,50 +59,47 @@ export async function viewDepartmentModal() {
 
     const companyName = document.querySelector('.view-department_company-name')
     
-    const allOutOfWorkEmployees = await getAllOutOfWorkEmployeesRequest()
-    
-    selectOutOfWorkEmployees(allOutOfWorkEmployees)
-    
     const updateBody = {}
     
     viewButtons.forEach(button => {
         button.addEventListener('click', async (event)=> {
             event.preventDefault()
             modalController.showModal()
+            const allCompanies = await getAllCompanies()
+
+            const allOutOfWorkEmployees = await getAllOutOfWorkEmployeesRequest()
             
+            selectOutOfWorkEmployees(allOutOfWorkEmployees)
+           
             const departmentID = event.target.id
             
             let dptoId = departmentID.substring(16)
 
+            const allDepartments = await getAllDepartmentsRequest()
+
             allDepartments.forEach(element => {
                 if(dptoId === element.id){
-                    const companyById =  filterCompaniesByIdRequest(element.company_id)
 
-                    companyById.then(async function (result) {
-                        const id = result.id
+                    departmentDescription.innerText = element.description
+                    departmentTitle.innerText = element.name
+                    
+                    const matchedCompany = allCompanies.find(
+                        (company) => company.id === element.company_id)
+                        if(matchedCompany){
+                            companyName.innerText = matchedCompany.name
 
-                        const companyDetails = await filterCompaniesByIdRequest(id)
+                            const companyDptoEmployeesPromise = filterCompaniesByIdRequest(matchedCompany.id)
 
-                        const arrayWithCompanyName = getArraywithCompanyName(companyDetails.employees)
-                        
-                        console.log(arrayWithCompanyName)
+                            companyDptoEmployeesPromise.then(({ employees }) => {
 
-                        createHiredEmployeesCards(arrayWithCompanyName)
+                                const arrayWithName = replaceCompanyId(employees, matchedCompany)
 
-                    })
+                                createHiredEmployeesCards(arrayWithName)
+                                console.log(arrayWithName)
 
-                }
-            })
+                            })
 
-            arrayWithCompanyNames.forEach(department => {
-
-                if(department.id === dptoId){
-                    departmentTitle.innerText = department.name
-
-                    departmentDescription.innerText = department.description
-
-                    companyName.innerText = department.company_id
-
+                        }
                 }
             })
 
@@ -138,19 +132,13 @@ function closeViewDepartmentModal() {
     })
 }
 
-function getArraywithCompanyName(array) {
-    const departments = array;
+function replaceCompanyId(employees, matchedCompany) {
+    return employees.map(employee => {
 
-    const companyByNameArray = departments.map(department => {
-        const matchingCompany = allCompanies.find(company => company.id === department.company_id)
+      const newEmployee = { ...employee }
+      
+      newEmployee.company_id = matchedCompany.name
 
-        if(matchingCompany){
-            return {
-                ...department,
-                company_id: matchingCompany.name
-            }
-        }
+      return newEmployee
     })
-    return companyByNameArray
-}
-
+  }

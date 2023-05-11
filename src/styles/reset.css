@@ -1,0 +1,5 @@
+body, header, div, img, h1, h2, h3, button, main, aside, ul, li, span {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}

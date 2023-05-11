@@ -1,7 +1,15 @@
 import { toast } from "./toast.js"
 import {green, getEmployeesProfileRequest, getDepartmentById, getAllCompanies } from "./requests.js"
 
-// import { allDepartments } from './adminDashboard.js'
+function authentication() {
+    const token = localStorage.getItem('@kenzieEmpresas:token')
+
+    if(!token){
+        location.replace('../../index.html')
+    }
+}
+
+authentication()
 
 function logOut() {
     const button = document.querySelector('.logout')
@@ -18,14 +26,8 @@ function logOut() {
 
 logOut()
 
-
-const employeesProfile = await getEmployeesProfileRequest()
-
-const allCompanies = getAllCompanies()
-
-// console.log(allDepartments)
-
 function userdetails(obj) {
+    const allCompanies = getAllCompanies()
     const username = document.querySelector('.user-details__username')
     const userEmail = document.querySelector('.user-details__userEmail')
     
@@ -34,8 +36,6 @@ function userdetails(obj) {
     const notHiredMsg = document.querySelector('.not-hired-message')
     const departmentDetails = document.querySelector('.user-department__container')
     const departmentCardsContainer = document.querySelector('.user-department__cards-container')
-
-    console.log(obj)
 
     allCompanies.then(function(array) {
         const companyName = array
@@ -71,7 +71,12 @@ function userdetails(obj) {
 
 }
 
-userdetails(employeesProfile)
+async function renderUserDetails() {
+    const employeesProfile = await getEmployeesProfileRequest()
+    userdetails(employeesProfile)
+}
+
+renderUserDetails()
 
 function departmentEmployeesCard(array) {
     const departmentContainer = document.querySelector('.user-department__container')

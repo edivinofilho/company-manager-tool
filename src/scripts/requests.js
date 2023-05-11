@@ -320,7 +320,7 @@ export async function getAllOutOfWorkEmployeesRequest() {
         } else {
             const response = await res.json()
             toast(red, response.message)
-            console.log(response)
+            // console.log(response)
             
         }
     })

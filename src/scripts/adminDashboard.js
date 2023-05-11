@@ -13,8 +13,6 @@ import { showEditDepartmentModal } from './editDepModal.js'
 
 import { viewDepartmentModal } from './viewModal.js'
 
-
-
 function authentication() {
     const token = localStorage.getItem('@kenzieEmpresas:token')
 
@@ -24,6 +22,7 @@ function authentication() {
 }
 
 authentication()
+
 
 function logOut() {
     const button = document.querySelector('.logout')
@@ -42,9 +41,6 @@ function logOut() {
 
 logOut()
 
-const allCompanies = await getAllCompanies()
-// console.log(allCompanies)
-
 export function selectCompany(array) {
     const select = document.querySelector('.select')
     
@@ -58,7 +54,12 @@ export function selectCompany(array) {
     })
 }
 
-selectCompany(allCompanies)
+async function renderSelectCompany() {
+    const allCompanies = await getAllCompanies()
+    selectCompany(allCompanies)
+}
+
+renderSelectCompany()
 
 export function createDepartmentCard(array) {
     const departmentListContainer = document.querySelector('.department__container')
@@ -118,31 +119,32 @@ export function createDepartmentCard(array) {
     })
 }
 
-export const allDepartments = await getAllDepartmentsRequest()
+export async function createAllDepartmentCards() {
+    const allCompanies = await getAllCompanies()
+    const allDepartments = await getAllDepartmentsRequest()
 
-
-export function createAllDepartmentCards() {
-    
     const departmentByCompanyName = allDepartments.map(department => {
         const company = allCompanies.find(company => company.id === department.company_id) 
-
+        
         if (company) {
             return {
                 ...department,
                 company_id: company.name 
             }
         }
+        console.log(department)
         return department
     })
 
+    createDepartmentCard(departmentByCompanyName)
+    
+    showDeleteDepartmentModal()
+    showEditDepartmentModal()
+    viewDepartmentModal()
 
-   createDepartmentCard(departmentByCompanyName)
 }
 
 createAllDepartmentCards()
-
-export const allEmployees = await getAllEmployeesRequest()
-// console.log(allEmployees)
 
 export function createUserCard(array) {
     const userCardContainer = document.querySelector('.user__container')
@@ -188,7 +190,9 @@ export function createUserCard(array) {
     showDeleteModal()
 }
 
-export function createAllUserCards() {
+export async function createAllUserCards() {
+    const allEmployees = await getAllEmployeesRequest()
+    const allCompanies = await getAllCompanies()
     const userWithCompanyName = allEmployees.map(user => {
         const company = allCompanies.find(company => company.id === user.company_id) 
 
@@ -205,7 +209,9 @@ export function createAllUserCards() {
 
 createAllUserCards()
 
-function filterCompanyById() {
+async function filterCompanyById() {
+    const allCompanies = await getAllCompanies()
+
     const select = document.querySelector('.select');
 
     const departmentList = document.querySelector('.department__container')
@@ -255,10 +261,6 @@ function filterCompanyById() {
 
 filterCompanyById()
 showCreateDepartmentModal()
-
-// Falta adicionar função para demitir todos os funcioários do departamento
 showDeleteDepartmentModal()
-
 showEditDepartmentModal()
-
 viewDepartmentModal()
