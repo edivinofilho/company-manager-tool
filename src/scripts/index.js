@@ -1,13 +1,22 @@
 import { getAllCategories, getAllCompanies, getCompanyByCategoryName } from "./requests.js";
 
-function authenticationAdmin() {
-    const token = localStorage.getItem('@kenzieEmpresas:token')
+function authentication() {
+    const token = JSON.parse(localStorage.getItem('@kenzieEmpresas:token'))
+
+    const isAdm = JSON.parse(localStorage.getItem('@kenzieEmpresas:isAdm'))
 
     if(token){
-        location.replace('./src/pages/adminDashboard.html')
+        if(isAdm){
+            location.replace('./src/pages/adminDashboard.html')
+
+        } else {
+            location.replace('./src/pages/userDashboard.html')
+        }
     }
 }
-authenticationAdmin()
+
+
+authentication()
 
 function loginPage() {
     const button = document.querySelector('.login')

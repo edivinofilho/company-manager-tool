@@ -14,12 +14,19 @@ import { showEditDepartmentModal } from './editDepModal.js'
 import { viewDepartmentModal } from './viewModal.js'
 
 function authentication() {
-    const token = localStorage.getItem('@kenzieEmpresas:token')
+    const token = JSON.parse(localStorage.getItem('@kenzieEmpresas:token'))
 
-    if(!token){
+    const isAdm = JSON.parse(localStorage.getItem('@kenzieEmpresas:isAdm'))
+
+    if(token){
+        if(!isAdm){
+            location.replace('./userDashboard.html')
+        } 
+    } else {
         location.replace('../../index.html')
     }
 }
+
 
 authentication()
 
@@ -118,6 +125,10 @@ export function createDepartmentCard(array) {
 
         return departmentCard
     })
+
+    showDeleteDepartmentModal()
+    showEditDepartmentModal()
+    viewDepartmentModal()
 }
 
 export async function createAllDepartmentCards() {
@@ -137,11 +148,20 @@ export async function createAllDepartmentCards() {
         return department
     })
 
+
     createDepartmentCard(departmentByCompanyName)
-    
-    showDeleteDepartmentModal()
-    showEditDepartmentModal()
-    viewDepartmentModal()
+
+    if(departmentByCompanyName.length === 0){
+        const departmentListContainer = document.querySelector('.departments__container')
+        const noDepartments = document.createElement('h2')
+        noDepartments.classList.add('no-departments-phrase')
+
+        departmentListContainer.innerText=''
+
+        noDepartments.innerText = 'Nenhuma empresa possui departamentos.'
+
+        departmentListContainer.appendChild(noDepartments)        
+    }
 
 }
 
@@ -236,6 +256,7 @@ async function filterCompanyById() {
             departmentList.innerHTML = ''
 
             const message = document.createElement('p')
+            message.classList.add('no-department-message')
             message.innerText = `Empresa ${companyName} não possui departamentos`
 
             departmentList.append(message)
@@ -263,6 +284,3 @@ async function filterCompanyById() {
 
 filterCompanyById()
 showCreateDepartmentModal()
-showDeleteDepartmentModal()
-showEditDepartmentModal()
-viewDepartmentModal()

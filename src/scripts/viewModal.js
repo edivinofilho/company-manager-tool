@@ -4,6 +4,7 @@ import { getAllOutOfWorkEmployeesRequest, hireEmployeeRequest, filterCompaniesBy
 function selectOutOfWorkEmployees(array) {
     const select = document.querySelector('#select-view-modal')
     
+    select.innerHTML = ''
     array.forEach(user => {
         const option = document.createElement('option')
         option.id = user.id 
@@ -32,7 +33,7 @@ function createHiredEmployeesCards(array) {
 
         const firedButton = document.createElement('button')
         firedButton.innerText = 'Desligar'
-        firedButton.classList.add('fire-employee')
+        firedButton.classList.add('working-employees__fired-button')
         firedButton.id = element.id
 
         console.log(firedButton.id)
@@ -58,6 +59,12 @@ export async function viewDepartmentModal() {
     const departmentDescription = document.querySelector('.view-department_description')
 
     const companyName = document.querySelector('.view-department_company-name')
+
+    const allOutOfWorkEmployees = await getAllOutOfWorkEmployeesRequest()
+            
+    selectOutOfWorkEmployees(allOutOfWorkEmployees)
+
+    console.log(allOutOfWorkEmployees)
     
     const updateBody = {}
     
@@ -66,10 +73,6 @@ export async function viewDepartmentModal() {
             event.preventDefault()
             modalController.showModal()
             const allCompanies = await getAllCompanies()
-
-            const allOutOfWorkEmployees = await getAllOutOfWorkEmployeesRequest()
-            
-            selectOutOfWorkEmployees(allOutOfWorkEmployees)
            
             const departmentID = event.target.id
             

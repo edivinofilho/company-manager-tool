@@ -1,13 +1,20 @@
 import { toast } from "./toast.js"
-import {green, getEmployeesProfileRequest, getDepartmentById, getAllCompanies } from "./requests.js"
+import {green, getEmployeesProfileRequest, getDepartmentById, getAllCompanies, filterCompaniesByIdRequest } from "./requests.js"
 
 function authentication() {
-    const token = localStorage.getItem('@kenzieEmpresas:token')
+    const token = JSON.parse(localStorage.getItem('@kenzieEmpresas:token'))
 
-    if(!token){
+    const isAdm = JSON.parse(localStorage.getItem('@kenzieEmpresas:isAdm'))
+
+    if(token){
+        if(isAdm){
+            location.replace('./adminDashboard.html')
+        } 
+    } else {
         location.replace('../../index.html')
     }
 }
+
 
 authentication()
 
@@ -20,6 +27,7 @@ function logOut() {
         setTimeout(() => {
             location.replace('../../index.html')            
           }, 2000)
+
           localStorage.clear()
     })
 }
@@ -41,7 +49,7 @@ function userdetails(obj) {
         const companyName = array
         companyName.forEach(element => {
             if (obj.company_id === element.id){
-                userCompanyDepartment.innerText = `${element.name}`
+                userCompanyDepartment.innerText = `${element.name} - `
                 console.log(element)
             }
         })
@@ -61,6 +69,11 @@ function userdetails(obj) {
             const employees = result.employees
             departmentEmployeesCard(employees)
             console.log(employees)
+
+            const departmentName = result.name
+            console.log(departmentName)
+
+            userCompanyDepartment.innerText += ` Departamento ${departmentName}`
         })
 
 

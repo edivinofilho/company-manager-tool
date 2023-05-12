@@ -1,6 +1,6 @@
-import { editUserDetailsRequest, red, green, getAllEmployeesRequest } from './requests.js'
+import { editUserDetailsRequest, red, green, getAllEmployeesRequest, getAllCompanies } from './requests.js'
 import { toast } from './toast.js'
-import { createUserCard } from './adminDashboard.js'
+import { createUserCard, createAllUserCards } from './adminDashboard.js'
 
 export async function showEditModal() {
     const modalController = document.querySelector('.modal__controller--edit')
@@ -30,6 +30,8 @@ export async function showEditModal() {
 
                 })
 
+                console.log(updateBody)
+
                 if(count !== 0){
                     count = 0
                     toast(red, 'Por favor preencha todos os campos') 
@@ -38,7 +40,6 @@ export async function showEditModal() {
                 
                     let id = idElement.substring(10)
 
-                    // console.log(id)
                     await editUserDetailsRequest(id, updateBody)
 
                     toast(green, 'Dados do usuário atualizado com sucesso')
@@ -47,9 +48,23 @@ export async function showEditModal() {
                     inputs.forEach(input=> {
                         input.value = ''
                     })
+
                     const allEmployees = await getAllEmployeesRequest()
+
+                    const allCompanies = await getAllCompanies()
+    
+                    const userWithCompanyName = allEmployees.map(user => {
+                        const company = allCompanies.find(company => company.id === user.company_id) 
+                        if (company) {
+                            return {
+                                ...user,
+                                company_id: company.name 
+                            }
+                        }
+                        return user
+                    })
                     
-                    createUserCard(allEmployees)
+                    createUserCard(userWithCompanyName)
 
                     modalController.close()
                 }
