@@ -148,20 +148,7 @@ export async function createAllDepartmentCards() {
         return department
     })
 
-
     createDepartmentCard(departmentByCompanyName)
-
-    // if(departmentByCompanyName.length === 0){
-    //     const departmentListContainer = document.querySelector('.departments__container')
-    //     const noDepartments = document.createElement('h2')
-    //     noDepartments.classList.add('no-departments-phrase')
-
-    //     departmentListContainer.innerText=''
-
-    //     noDepartments.innerText = 'Nenhuma empresa possui departamentos.'
-
-    //     departmentListContainer.appendChild(noDepartments)        
-    // }
 
 }
 
@@ -284,3 +271,6 @@ async function filterCompanyById() {
 
 filterCompanyById()
 showCreateDepartmentModal()
+// showDeleteDepartmentModal()
+// showEditDepartmentModal()
+// viewDepartmentModal()
