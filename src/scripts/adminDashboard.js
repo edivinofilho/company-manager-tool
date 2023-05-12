@@ -27,7 +27,6 @@ function authentication() {
     }
 }
 
-
 authentication()
 
 
@@ -271,6 +270,6 @@ async function filterCompanyById() {
 
 filterCompanyById()
 showCreateDepartmentModal()
-// showDeleteDepartmentModal()
-// showEditDepartmentModal()
-// viewDepartmentModal()
+showDeleteDepartmentModal()
+showEditDepartmentModal()
+viewDepartmentModal()
