@@ -151,17 +151,17 @@ export async function createAllDepartmentCards() {
 
     createDepartmentCard(departmentByCompanyName)
 
-    if(departmentByCompanyName.length === 0){
-        const departmentListContainer = document.querySelector('.departments__container')
-        const noDepartments = document.createElement('h2')
-        noDepartments.classList.add('no-departments-phrase')
+    // if(departmentByCompanyName.length === 0){
+    //     const departmentListContainer = document.querySelector('.departments__container')
+    //     const noDepartments = document.createElement('h2')
+    //     noDepartments.classList.add('no-departments-phrase')
 
-        departmentListContainer.innerText=''
+    //     departmentListContainer.innerText=''
 
-        noDepartments.innerText = 'Nenhuma empresa possui departamentos.'
+    //     noDepartments.innerText = 'Nenhuma empresa possui departamentos.'
 
-        departmentListContainer.appendChild(noDepartments)        
-    }
+    //     departmentListContainer.appendChild(noDepartments)        
+    // }
 
 }
 
