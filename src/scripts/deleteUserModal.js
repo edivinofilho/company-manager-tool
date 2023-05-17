@@ -28,9 +28,23 @@ export async function showDeleteModal() {
 
                 await deleteUserRequest(id)
         
-                const allEmployees = await getAllEmployeesRequest() 
+                const allEmployees = await getAllEmployeesRequest()
 
-                createUserCard(allEmployees)
+                const allCompanies = await getAllCompanies()
+    
+                const userWithCompanyName = allEmployees.map(user => {
+                    const company = allCompanies.find(company => company.id === user.company_id) 
+                        if (company) {
+                            return {
+                                ...user,
+                                company_id: company.name 
+                            }
+                        }
+                        return user
+                    })
+                console.log(userWithCompanyName)
+
+                createUserCard(userWithCompanyName)
 
                 modalController.close()
             })

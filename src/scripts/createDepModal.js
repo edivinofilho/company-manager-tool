@@ -57,6 +57,7 @@ export async function showCreateDepartmentModal() {
 
             createNewDepartmentRequest(updateBody)
             modalController.close()
+            
         })
         
     })

@@ -63,7 +63,7 @@ export async function showEditModal() {
                         }
                         return user
                     })
-                    
+                    console.log(userWithCompanyName)
                     createUserCard(userWithCompanyName)
 
                     modalController.close()
